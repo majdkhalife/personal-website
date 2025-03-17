@@ -57,8 +57,10 @@
           <article class="col-6 col-12-xsmall work-item">
             <a
               href="https://github.com/majdkhalife/StockPredictor"
-              class="image fit thumb"
-              ><img src="images/fulls/stock-predictor.png" alt=""
+              class="image fit thumb external-link"
+              target="_blank"
+              rel="noopener noreferrer"
+              ><img src="images/fulls/stock-predictor.png" alt="Stock Price Predictor"
             /></a>
             <h3>Stock Price Predictor</h3>
             <p>
@@ -529,5 +531,20 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
     <script src="assets/js/breakpoints.min.js"></script>
     <script src="assets/js/util.js"></script>
     <script src="assets/js/main.js"></script>
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			document.querySelectorAll('.external-link').forEach(link => {
+				link.classList.remove("thumb"); // Remove lightbox class
+				link.addEventListener("click", function (event) {
+					event.stopPropagation(); // Prevent modal from opening
+					event.preventDefault(); // Stop default behavior (optional)
+					window.open(link.href, "_blank"); // Open GitHub in new tab
+				});
+			});
+		});
+	</script>
+	</body>
+	</html>
+	
   </body>
 </html>
