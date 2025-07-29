@@ -1,4 +1,3 @@
-# .github/workflows/static.yml
 name: Deploy static content to Pages
 
 on:
@@ -19,8 +18,7 @@ jobs:
       url: ${{ steps.deploy.outputs.page_url }}
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -33,15 +31,13 @@ jobs:
       - name: Build site
         run: npm run build
 
-      - name: Upload static assets
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Only upload the final `dist/` output
-          path: ./dist
+          path: dist # <— only dist/
 
       - name: Deploy to GitHub Pages
         id: deploy
         uses: actions/deploy-pages@v4
         with:
-          # This step picks up the artifact created above
           artifact_name: pages
