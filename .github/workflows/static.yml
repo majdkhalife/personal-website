@@ -1,4 +1,3 @@
-# .github/workflows/static.yml
 name: Deploy static content to Pages
 
 on:
@@ -19,10 +18,9 @@ jobs:
       url: ${{ steps.deploy.outputs.page_url }}
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Install Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
@@ -33,14 +31,14 @@ jobs:
       - name: Build site
         run: npm run build
 
-      # Sanity check: list out dist contents
-      - name: Show build output
+      - name: Show dist contents
         run: ls -R dist
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist
+          artifact_name: pages # ← add this line
 
       - name: Deploy to GitHub Pages
         id: deploy
