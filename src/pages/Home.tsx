@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { ThemeToggle } from "../components/ThemeToggle";
-import { DynamicBackground, LightBackground } from "../components/DynamicBackground";
+import {
+  DynamicBackground,
+  LightBackground,
+} from "../components/DynamicBackground";
 import { Navbar } from "../components/Navbar";
 import { HeroSection } from "../components/HeroSection";
 import { AboutSection } from "../components/AboutSection";
@@ -29,10 +32,13 @@ export const Home = () => {
         isDarkMode ? "bg-background text-foreground" : "bg-white text-black"
       }`}
     >
-      <ThemeToggle isDarkMode={isDarkMode} toggle={() => setIsDarkMode((v) => !v)} />
+      <ThemeToggle
+        isDarkMode={isDarkMode}
+        toggle={() => setIsDarkMode((v) => !v)}
+      />
 
       {/* Render appropriate background */}
-      {isDarkMode ? <DynamicBackground isDarkMode /> : <LightBackground />}
+      {isDarkMode ? <DynamicBackground /> : <LightBackground />}
 
       <Navbar />
       <main>

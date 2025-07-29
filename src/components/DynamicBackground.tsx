@@ -1,35 +1,50 @@
 import { useEffect, useRef } from "react";
 
-export const DynamicBackground = ({ isDarkMode }: { isDarkMode: boolean }) => {
+export const DynamicBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   useEffect(() => {
     const canvas = canvasRef.current!;
     const ctx = canvas.getContext("2d")!;
-    let width = window.innerWidth, height = window.innerHeight;
-    canvas.width = width; canvas.height = height;
+    let width = window.innerWidth,
+      height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
     const particles: { x: number; y: number; vx: number; vy: number }[] = [];
-    const numParticles = 80, maxDist = 120;
-    for (let i = 0; i < numParticles; i++) particles.push({
-      x: Math.random() * width,
-      y: Math.random() * height,
-      vx: (Math.random() - 0.5) * 0.4,
-      vy: (Math.random() - 0.5) * 0.4,
-    });
+    const numParticles = 80,
+      maxDist = 120;
+    for (let i = 0; i < numParticles; i++)
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+      });
     const animate = () => {
       ctx.fillStyle = "hsl(222,47%,11%)";
       ctx.fillRect(0, 0, width, height);
       particles.forEach((p, i) => {
-        p.x += p.vx; p.y += p.vy;
+        p.x += p.vx;
+        p.y += p.vy;
         if (p.x < 0 || p.x > width) p.vx *= -1;
         if (p.y < 0 || p.y > height) p.vy *= -1;
-        ctx.beginPath(); ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
-        ctx.fillStyle = "#00ffff"; ctx.shadowColor = "#00ffff"; ctx.shadowBlur = 8; ctx.fill();
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+        ctx.fillStyle = "#00ffff";
+        ctx.shadowColor = "#00ffff";
+        ctx.shadowBlur = 8;
+        ctx.fill();
         for (let j = i + 1; j < particles.length; j++) {
-          const q = particles[j], dx = p.x - q.x, dy = p.y - q.y;
+          const q = particles[j],
+            dx = p.x - q.x,
+            dy = p.y - q.y;
           const dist = Math.hypot(dx, dy);
           if (dist < maxDist) {
-            ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y);
-            ctx.strokeStyle = `rgba(0,255,255,${1 - dist / maxDist})`; ctx.lineWidth = 0.7; ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(q.x, q.y);
+            ctx.strokeStyle = `rgba(0,255,255,${1 - dist / maxDist})`;
+            ctx.lineWidth = 0.7;
+            ctx.stroke();
           }
         }
       });
@@ -37,12 +52,16 @@ export const DynamicBackground = ({ isDarkMode }: { isDarkMode: boolean }) => {
     };
     animate();
     window.addEventListener("resize", () => {
-      width = window.innerWidth; height = window.innerHeight;
-      canvas.width = width; canvas.height = height;
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
     });
     return () => window.removeEventListener("resize", () => {});
   }, []);
-  return <canvas ref={canvasRef} className="fixed inset-0 z-0 pointer-events-none" />;
+  return (
+    <canvas ref={canvasRef} className="fixed inset-0 z-0 pointer-events-none" />
+  );
 };
 
 //optical-flow inspired background for autonomous driving perception
@@ -57,7 +76,13 @@ export const LightBackground = () => {
     canvas.width = width;
     canvas.height = height;
 
-    type Flow = { x: number; y: number; len: number; vy: number; slant: number };
+    type Flow = {
+      x: number;
+      y: number;
+      len: number;
+      vy: number;
+      slant: number;
+    };
     const numFlows = 120;
     const flows: Flow[] = [];
 
@@ -107,5 +132,7 @@ export const LightBackground = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  return <canvas ref={canvasRef} className="fixed inset-0 z-0 pointer-events-none" />;
+  return (
+    <canvas ref={canvasRef} className="fixed inset-0 z-0 pointer-events-none" />
+  );
 };
