@@ -1,3 +1,4 @@
+# .github/workflows/static.yml
 name: Deploy static content to Pages
 
 on:
@@ -38,7 +39,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist
-          artifact_name: pages # ← add this line
+          name: pages # ← here
 
       - name: Deploy to GitHub Pages
         id: deploy
