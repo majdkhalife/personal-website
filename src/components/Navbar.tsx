@@ -57,7 +57,7 @@ export const Navbar = () => {
           </span>
         </a>
 
-        <div className="hidden md:flex space-x-8">
+        <div className="hidden md:flex space-x-8 pr-8">
           {navItems.map((item, key) => (
             <a
               key={key}
