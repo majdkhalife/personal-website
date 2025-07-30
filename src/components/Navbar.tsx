@@ -15,30 +15,31 @@ export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("#hero");
 
+  /* ───────────────────────── scroll‑spy / shadow ────────────────────────── */
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
 
-      const sections = navItems.map((item) => {
-        const el = document.querySelector(item.href);
-        if (!el) return null;
-        const rect = el.getBoundingClientRect();
-        return { id: item.href, offset: rect.top };
-      });
-
-      const visibleSection = sections
+      const visible = navItems
+        .map((item) => {
+          const el = document.querySelector(item.href);
+          if (!el) return null;
+          const rect = el.getBoundingClientRect();
+          return { id: item.href, offset: rect.top };
+        })
         .filter(Boolean)
         .find(
           (sec) => sec!.offset >= 0 && sec!.offset < window.innerHeight / 2
         );
 
-      if (visibleSection) setActiveSection(visibleSection.id);
+      if (visible) setActiveSection(visible.id);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  /* ─────────────────────────────── render ──────────────────────────────── */
   return (
     <nav
       className={cn(
@@ -47,22 +48,22 @@ export const Navbar = () => {
       )}
     >
       <div className="mx-auto max-w-7xl flex items-center justify-between px-4 md:px-8 lg:px-12">
-        {/* Logo */}
+        {/* ─── Logo ─── */}
         <a
-          className="text-xl font-bold text-primary flex items-center"
           href="#hero"
+          className="text-xl font-bold text-primary flex items-center"
         >
           <span className="relative z-10">
-            <span className="text-glow text-foreground">Majd Khalife’s</span>{" "}
+            <span className="text-glow text-foreground">Majd Khalife’s</span>{" "}
             Portfolio
           </span>
         </a>
 
-        {/* Desktop nav */}
+        {/* ─── Desktop nav links ─── */}
         <div className="hidden md:flex space-x-8">
-          {navItems.map((item, key) => (
+          {navItems.map((item) => (
             <a
-              key={key}
+              key={item.href}
               href={item.href}
               className={cn(
                 "transition-colors duration-300",
@@ -76,16 +77,21 @@ export const Navbar = () => {
           ))}
         </div>
 
-        {/* Mobile menu button */}
+        {/* ─── Mobile hamburger (shifted left so it no longer collides
+               with the fixed ThemeToggle in the top‑right corner) ─── */}
         <button
           onClick={() => setIsMenuOpen((prev) => !prev)}
-          className="md:hidden p-2 text-foreground z-50"
           aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
+          className={cn(
+            "md:hidden p-2 text-foreground z-50",
+            /* shift only on small screens; reset at md */
+            "mr-14 md:mr-0"
+          )}
         >
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
 
-        {/* Mobile menu overlay */}
+        {/* ─── Mobile full‑screen overlay ─── */}
         <div
           className={cn(
             "fixed inset-0 bg-background/95 backdrop-blur-md z-40 flex flex-col items-center justify-center transition-all duration-300 md:hidden",
@@ -95,9 +101,9 @@ export const Navbar = () => {
           )}
         >
           <div className="flex flex-col space-y-8 text-xl">
-            {navItems.map((item, key) => (
+            {navItems.map((item) => (
               <a
-                key={key}
+                key={item.href}
                 href={item.href}
                 onClick={() => setIsMenuOpen(false)}
                 className={cn(
