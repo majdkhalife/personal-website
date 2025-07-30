@@ -32,7 +32,11 @@ jobs:
       - name: Build site
         run: npm run build
 
+      - name: Disable Jekyll
+        run: touch dist/.nojekyll
+
       - name: Show dist contents
+        echo "CONTENTS OF BUILD/"
         run: ls -R dist
 
       - name: Upload Pages artifact
