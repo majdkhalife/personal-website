@@ -63,7 +63,7 @@ export const ContactSection = () => {
                   <Linkedin />
                 </a>
                 <a
-                  href="https://github.com/mcgill-robotics/AUV-2025"
+                  href="https://github.com/majdkhalife"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
