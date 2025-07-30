@@ -46,18 +46,20 @@ export const Navbar = () => {
         isScrolled ? "py-3 bg-background/80 backdrop-blur-md shadow-sm" : "py-5"
       )}
     >
-      <div className="container flex items-center justify-between px-4 md-8 lg:px-12">
+      <div className="mx-auto max-w-7xl flex items-center justify-between px-4 md:px-8 lg:px-12">
+        {/* Logo */}
         <a
           className="text-xl font-bold text-primary flex items-center"
           href="#hero"
         >
           <span className="relative z-10">
-            <span className="text-glow text-foreground">Majd Khalife's</span>{" "}
+            <span className="text-glow text-foreground">Majd Khalife’s</span>{" "}
             Portfolio
           </span>
         </a>
 
-        <div className="hidden md:flex space-x-8 pr-8">
+        {/* Desktop nav */}
+        <div className="hidden md:flex space-x-8">
           {navItems.map((item, key) => (
             <a
               key={key}
@@ -74,6 +76,7 @@ export const Navbar = () => {
           ))}
         </div>
 
+        {/* Mobile menu button */}
         <button
           onClick={() => setIsMenuOpen((prev) => !prev)}
           className="md:hidden p-2 text-foreground z-50"
@@ -82,6 +85,7 @@ export const Navbar = () => {
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
 
+        {/* Mobile menu overlay */}
         <div
           className={cn(
             "fixed inset-0 bg-background/95 backdrop-blur-md z-40 flex flex-col items-center justify-center transition-all duration-300 md:hidden",
