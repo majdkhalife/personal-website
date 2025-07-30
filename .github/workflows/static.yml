@@ -28,11 +28,16 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Dump built index.html
+        run: sed -n '1,20p' dist/index.html
+
       - name: Build site
         run: npm run build
 
-      - name: Disable Jekyll on Pages
-        run: touch dist/.nojekyll
+      - name: Add CNAME and disable Jekyll
+      run: |
+      echo 'majdkhalife.com' > dist/CNAME
+      touch dist/.nojekyll
 
       - name: Show dist contents
         run: |
