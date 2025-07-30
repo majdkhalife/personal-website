@@ -28,7 +28,9 @@ export const Navbar = () => {
 
       const visibleSection = sections
         .filter(Boolean)
-        .find((sec) => sec!.offset >= 0 && sec!.offset < window.innerHeight / 2);
+        .find(
+          (sec) => sec!.offset >= 0 && sec!.offset < window.innerHeight / 2
+        );
 
       if (visibleSection) setActiveSection(visibleSection.id);
     };
@@ -44,10 +46,14 @@ export const Navbar = () => {
         isScrolled ? "py-3 bg-background/80 backdrop-blur-md shadow-sm" : "py-5"
       )}
     >
-      <div className="container flex items-center justify-between px-4">
-        <a className="text-xl font-bold text-primary flex items-center" href="#hero">
+      <div className="container flex items-center justify-between px-4 md-8 lg:px-12">
+        <a
+          className="text-xl font-bold text-primary flex items-center"
+          href="#hero"
+        >
           <span className="relative z-10">
-            <span className="text-glow text-foreground">Majd Khalife's</span> Portfolio
+            <span className="text-glow text-foreground">Majd Khalife's</span>{" "}
+            Portfolio
           </span>
         </a>
 
@@ -58,7 +64,9 @@ export const Navbar = () => {
               href={item.href}
               className={cn(
                 "transition-colors duration-300",
-                activeSection === item.href ? "text-primary font-semibold" : "text-foreground/80 hover:text-primary"
+                activeSection === item.href
+                  ? "text-primary font-semibold"
+                  : "text-foreground/80 hover:text-primary"
               )}
             >
               {item.name}
@@ -77,7 +85,9 @@ export const Navbar = () => {
         <div
           className={cn(
             "fixed inset-0 bg-background/95 backdrop-blur-md z-40 flex flex-col items-center justify-center transition-all duration-300 md:hidden",
-            isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+            isMenuOpen
+              ? "opacity-100 pointer-events-auto"
+              : "opacity-0 pointer-events-none"
           )}
         >
           <div className="flex flex-col space-y-8 text-xl">
@@ -88,7 +98,9 @@ export const Navbar = () => {
                 onClick={() => setIsMenuOpen(false)}
                 className={cn(
                   "transition-colors duration-300",
-                  activeSection === item.href ? "text-primary font-semibold" : "text-foreground/80 hover:text-primary"
+                  activeSection === item.href
+                    ? "text-primary font-semibold"
+                    : "text-foreground/80 hover:text-primary"
                 )}
               >
                 {item.name}
