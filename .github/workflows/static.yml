@@ -1,4 +1,3 @@
-# .github/workflows/static.yml
 name: Deploy static content to Pages
 
 on:
@@ -32,18 +31,19 @@ jobs:
       - name: Build site
         run: npm run build
 
-      - name: Disable Jekyll
+      - name: Disable Jekyll on Pages
         run: touch dist/.nojekyll
 
       - name: Show dist contents
-        echo "CONTENTS OF BUILD/"
-        run: ls -R dist
+        run: |
+          echo "CONTENTS OF BUILD/"
+          ls -R dist
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist
-          name: pages # ← here
+          name: pages
 
       - name: Deploy to GitHub Pages
         id: deploy
