@@ -1,12 +1,6 @@
 import React from "react";
 import { useForm, ValidationError } from "@formspree/react";
-import {
-  Mail,
-  Phone,
-  MapPin,
-  Linkedin,
-  Github,
-} from "lucide-react";
+import { Mail, Phone, MapPin, Linkedin, Github } from "lucide-react";
 
 export const ContactSection = () => {
   const [state, handleSubmit] = useForm("mkgzbapy");
@@ -62,14 +56,14 @@ export const ContactSection = () => {
               <h4 className="text-lg font-semibold mb-2">Connect With Me</h4>
               <div className="flex justify-center gap-4 text-primary">
                 <a
-                  href="https://linkedin.com/in/majd.khalife"
+                  href="https://www.linkedin.com/in/majd-khalife/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <Linkedin />
                 </a>
                 <a
-                  href="https://github.com/majd-khalife"
+                  href="https://github.com/mcgill-robotics/AUV-2025"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -85,7 +79,9 @@ export const ContactSection = () => {
             className="bg-background/80 border border-border rounded-lg p-6 space-y-6 shadow-md"
           >
             <div>
-              <label className="block mb-2 text-sm font-medium">Your Name</label>
+              <label className="block mb-2 text-sm font-medium">
+                Your Name
+              </label>
               <input
                 type="text"
                 name="name"
@@ -96,7 +92,9 @@ export const ContactSection = () => {
             </div>
 
             <div>
-              <label className="block mb-2 text-sm font-medium">Your Email</label>
+              <label className="block mb-2 text-sm font-medium">
+                Your Email
+              </label>
               <input
                 type="email"
                 name="email"
@@ -113,7 +111,9 @@ export const ContactSection = () => {
             </div>
 
             <div>
-              <label className="block mb-2 text-sm font-medium">Your Message</label>
+              <label className="block mb-2 text-sm font-medium">
+                Your Message
+              </label>
               <textarea
                 name="message"
                 rows={5}
